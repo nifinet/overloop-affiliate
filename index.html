@@ -672,6 +672,14 @@
     </footer>
 
     <script>
+        // Clean tracking params from URL
+        if (location.search.includes('_gl=') || location.search.includes('_ga=')) {
+            const url = new URL(location.href);
+            url.searchParams.delete('_gl');
+            url.searchParams.delete('_ga');
+            history.replaceState(null, '', url.pathname + (url.search || '') + url.hash);
+        }
+
         // Scroll animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
